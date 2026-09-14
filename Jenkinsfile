@@ -77,5 +77,29 @@ pipeline {
                 }
             }
         }
+        stages('push order service'){
+            steps {
+                bat 'docker tag order-service:latest p2709/order-service'
+                bat 'docker push p2709/order-service'
+            }
+        }
+        stages('push product service'){
+             steps {
+                 bat 'docker tag product-service:latest p2709/product-service'
+                 bat 'docker push p2709/product-service'
+             }
+        }
+        stages('push api gateway'){
+             steps {
+                 bat 'docker tag api-gateway:latest p2709/api-gateway'
+                 bat 'docker push p2709/api-gateway'
+             }
+        }
+        stages('push eureka server'){
+             steps {
+                 bat 'docker tag eureka-server:latest p2709/eureka-server'
+                 bat 'docker push p2709/eureka-server'
+             }
+        }
     }
 }
