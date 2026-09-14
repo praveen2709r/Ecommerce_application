@@ -54,7 +54,7 @@ pipeline {
         }
         stage('Docker Build - eureka server'){
             steps {
-                dir('service-discover/service-discovery'){
+                dir('service-discovery/service-discovery'){
                     bat 'docker build -t eureka-server:latest .'
                 }
             }
