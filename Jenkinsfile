@@ -38,5 +38,33 @@ pipeline {
                 }
             }
         }
+        stage('Docker Build - Product service'){
+            steps {
+                dir('product-service/product-service'){
+                    bat 'docker build -t product-service:latest .'
+                }
+            }
+        }
+        stage('Docker Build - Order service'){
+            steps {
+                dir('order-service/order-service'){
+                    bat 'docker build -t order-service:latest .'
+                }
+            }
+        }
+        stage('Docker Build - eureka server'){
+            steps {
+                dir('service-discover/service-discovery'){
+                    bat 'docker build -t eureka-server:latest .'
+                }
+            }
+        }
+        stage('Docker Build - api gateway'){
+            steps {
+                dir('api-gateway/api-gateway'){
+                    bat 'docker build -t api-gateway:latest .'
+                }
+            }
+        }
     }
 }
