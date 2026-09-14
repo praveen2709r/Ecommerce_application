@@ -5,19 +5,37 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'E-commerce source code checked out'
+                 checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Build API Gateway') {
             steps {
-                echo 'Building E-commerce application'
+                dir('api-gateway/api-gateway') {
+                    bat 'mvn clean package -DskipTests'
+                }
+            }
+            }
+
+        stage('Build Order Service') {
+            steps {
+                dir('order-service/order-service'){
+                    bat 'mvn clean package -DskipTests'
+                }
             }
         }
-
-        stage('Test') {
+        stage('Build Product Service'){
             steps {
-                echo 'Running tests'
+                dir('product-service/product-service'){
+                    bat 'mvn clean package -DskipTests'
+                }
+            }
+        }
+        stage('Build Service discovery'){
+            steps {
+                dir('service-discovery/service-discovery'){
+                    bat 'mvn clean package -DskipTests'
+                }
             }
         }
     }
